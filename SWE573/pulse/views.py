@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def index(request):
-	return HttpResponse("Hello world. You are at the pulse index.")
+	return render(request, "pulse/index.html")
