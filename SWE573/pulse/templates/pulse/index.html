@@ -1,28 +1,52 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Index{% endblock %}</title>
+    {% block style %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"
+                type="application/javascript"></script>
+        <script src="{% static '/js/index.js' %}" type="application/javascript"></script>
+    {% endblock %}
 </head>
 <body>
 {% block pagecontent %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="mt-5">Sentiment Score for {{ search_term }}</h1>
-                <p class="lead positive">Positive Score: {{ positive_score }}</p>
-                <p class="lead negative">Negative Score: -{{ negative_score }}</p>
-                {% if total_score > 0 %}
-                    <p class="lead positive">Total Score: {{ total_score }}</p>
-                {% else %}
-                    <p class="lead negative">Total Score: {{ total_score }}</p>
-                {% endif %}
+                <form action="{% url 'pulse:index' %}" method="post">
+                    {% csrf_token %}
+                    <br>
+                    <label for="search_term_input">Search Term</label>
+                    <input type="text" name="search_term" id="search_term_input"/>
+                    <br>
+                    <label for="start_date_input">Start Date</label>
+                    <input type="text" name="start_date" id="start_date_input"/>
+                    <br>
+                    <label for="end_date_input">End Date</label>
+                    <input type="text" name="end_date" id="end_date_input"/>
+                    <br>
+                    <input type="submit" value="Load"/>
+                </form>
 
             </div>
         </div>
     </div>
+    <div style="width: 50%">
+        <canvas id="result_chart"></canvas>
+    </div>
+    <script>
+        var res = "{{ result }}";
+
+        if (res !== "") {
+            drawChart(res);
+        }
+    </script>
 {% endblock %}
+
 </body>
 </html>
