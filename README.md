@@ -1,9 +1,5 @@
-# SWE573
+# Luscinia
 This repository is for the project that I will work on every week for the SWE 573 class, under the supervision of Prof. Dr. Suzan Uskudarli in Bogazici University.
-
-Every week, a summary of the research I do will be posted on the wiki page of this repository. They will be titled "Week One", "Week Two" etc.
-
-It is my hope that this repository will be kept up to date on a regular basis.
 
 ## Project Details
 The project will allow users to perform sentiment analysis via a web user interface. It will query the Twitter API and chart out the general feelings people have about a certain topic. The user will be able to choose a time range and a country. The results will be displayed as charts.
