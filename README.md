@@ -1,33 +1,14 @@
 # Luscinia
-This repository is for the project that I will work on every week for the SWE 573 class, under the supervision of Prof. Dr. Suzan Uskudarli in Bogazici University.
+Lusicinia is a sentiment analyzer & visualizer that uses the Twitter API. This project is being built for the Software Development Practice class in the Boğaziçi University Software Engineering Masters Programme, under the supervision of Prof. Dr. Suzan Üsküdarli.
 
 ## Project Details
-The project will allow users to perform sentiment analysis via a web user interface. It will query the Twitter API and chart out the general feelings people have about a certain topic. The user will be able to choose a time range and a country. The results will be displayed as charts.
+Lusicinia allows users to perform sentiment analysis via a web user interface. It will query the Twitter API and chart out the general feelings people have about a certain topic. The user will be able to choose a time range and a country. The results- which are the negativity score, positivity score, neutrality score and the compound score- will be displayed in a chart.
 
-The project will be written using Python 3 with Django.
+The project is written using Python 3 with Django. It uses the [NLTK](https://www.nltk.org/) library for NLP and sentiment analysis work.
 
 ### Sentiment Analysis
-Sentiment analysis will be done by analyzing the tweets and assigning a score to them which signifies how positive or negative it is. A minus score will mean a negative tweet, while a positive score will mean a positive tweet. A score of zero means a tweet is neutral. The scoring will be accomplished by having a database of words that have their own scoring on how positive or negative the word is, and then adding them up.
+Sentiment analysis is done by the NLTK library. Specifically, it uses the VADER (Valence Aware Dictionary and sEntiment Reasoner) module, which is optimized for social media posts -perfect for this project. How VADER works can be read [here](http://t-redactyl.io/blog/2017/04/using-vader-to-handle-sentiment-analysis-with-social-media-text.html), however, to summarize; VADER assigns a score to each word in the sentence based on how negative or positive it is, then sums them up and returns a compound value. What makes VADER a good fit for social media texts is that it also takes emoticons, acronyms, capitalization and punctuation into account. It even considers modifier words like _extremely_ into account.
 
-#### Example
-For example, the tweet:
+For more details about VADER, please take a look at the paper _VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text_ by C.J. Hutto Eric Gilbert from Georgia Institute of Technology, Atlanta, GA, which can be found [here](comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf). 
 
->I hate that goddamn idiot. I hope he dies.
-
-has four negative words - "hate", "goddamn", "idiot" and "dies". It also has one positive word, "hope". If we were to assign scores to these words based on how positive or negative they are, we can come up with this table (please note that for this example, the scores are arbitrary):
-
-| Word        | Score           |
-| ------------- | ------------- |
-|hate| -7 |
-| goddamn      | -3      |
-| idiot | -3      |
-| dies | -8      |
-| hope | 3      |
-
-Adding up the scores, we get -18, which means that our tweet is very negative.
-
-#### Notes
-* We will take misspelings into account.
-* Intensifier words like very, too, so, quite, rather will have multipliers that affect the word to the right of them. For example, if "good" has a score of 4, and "very" has the multiplier of 2, "very good" will have the score of 8.
-* Negator words like not will reverse the score. For example, if "bad" has a score of -3, "not bad" will have a score of 3.
-* If possible, we will use existing word databases.
+For more information about NLTK in general, please take a look at the NLTK book _Natural Language Processing with Python_ published by O’Reilly Media Inc. from authors Bird, Steven, Edward Loper and Ewan Klein.
