@@ -1,4 +1,4 @@
-# Luscinia
+# Luscinia [![Build Status](https://travis-ci.org/umutseven92/SWE573.svg?branch=master)](https://travis-ci.org/umutseven92/SWE573)
 Lusicinia is a sentiment analyzer & visualizer that uses the Twitter API. This project is being built for the Software Development Practice class in the Boğaziçi University Software Engineering Masters Programme, under the supervision of Prof. Dr. Suzan Üsküdarli.
 
 ## Project Details
