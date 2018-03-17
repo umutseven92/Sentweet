@@ -8,6 +8,29 @@ body {
     }
 }
 
-#result_chart{
-
+#result_chart {
+    border: solid 1px black;
+    margin-top: 1em;
 }
+
+.inputwrap {
+    padding-top: 0.5em;
+}
+
+.inputwrap input {
+    display: inline-block;
+    text-align: right;
+}
+
+.inputwrap label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+

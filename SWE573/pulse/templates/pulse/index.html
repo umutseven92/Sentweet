@@ -15,29 +15,33 @@
 </head>
 <body>
 {% block pagecontent %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <form action="{% url 'pulse:index' %}" method="post">
-                    {% csrf_token %}
-                    <br>
-                    <label for="search_term_input">Search Term</label>
-                    <input type="text" name="search_term" id="search_term_input"/>
-                    <br>
-                    <label for="start_date_input">Start Date</label>
-                    <input type="text" name="start_date" id="start_date_input"/>
-                    <br>
-                    <label for="end_date_input">End Date</label>
-                    <input type="text" name="end_date" id="end_date_input"/>
-                    <br>
-                    <input type="submit" value="Load"/>
-                </form>
-
-            </div>
+    <div>
+        <div style="width: 60%">
+            <canvas id="result_chart"></canvas>
         </div>
-    </div>
-    <div style="width: 50%">
-        <canvas id="result_chart"></canvas>
+
+        <div style="margin-top: 2em">
+            <form action="{% url 'pulse:index' %}" method="post">
+                {% csrf_token %}
+                <div class="inputwrap">
+                    <label for="search_term_input">Search Term</label>
+                    <input type="text" name="search_term" id="search_term_input" required/>
+                </div>
+                <div class="inputwrap">
+
+                    <label for="start_date_input">Start Date</label>
+                    <input type="date" name="start_date" id="start_date_input" required/>
+                </div>
+                <div class="inputwrap">
+                    <label for="end_date_input">End Date</label>
+                    <input type="date" name="end_date" id="end_date_input" required/>
+                </div>
+                <div style="margin-top: 1em">
+                    <input type="submit" value="Load"/>
+                </div>
+            </form>
+        </div>
+
     </div>
     <script>
         var res = "{{ result }}";
@@ -46,6 +50,7 @@
             drawChart(res);
         }
     </script>
+
 {% endblock %}
 
 </body>
