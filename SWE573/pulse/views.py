@@ -1,18 +1,24 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import os
+from django.http import Http404
+from os import environ
 import twitter
 
 
 def index(request):
 
     if request.method == 'POST':
-        consumer_key = os.environ["consumerKey"]
-        consumer_secret = os.environ["consumerSecret"]
-        access_token_key = os.environ["accessTokenKey"]
-        access_token_secret = os.environ["accessTokenSecret"]
-
+        # If env not found, no exceptions will be thrown.
+        consumer_key = environ.get("consumerKey")
+        consumer_secret = environ.get("consumerSecret")
+        access_token_key = environ.get("accessTokenKey")
+        access_token_secret = environ.get("accessTokenSecret")
+        
+        # Manuel handling of env exception.
+        if not consumer_key or not consumer_secret or not access_token_key or not access_token_secret:
+            # Change this to an actual error page.
+            return Http404
         api = twitter.Api(consumer_key=consumer_key,
                           consumer_secret=consumer_secret,
                           access_token_key=access_token_key,
