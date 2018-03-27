@@ -1,33 +1,11 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from django.http import Http404
-from os import environ
-import twitter
+from . import twitter_helper as tw
 
 
 def index(request):
-
     if request.method == 'POST':
-        # If env not found, no exceptions will be thrown.
-        consumer_key = environ.get("consumerKey")
-        consumer_secret = environ.get("consumerSecret")
-        access_token_key = environ.get("accessTokenKey")
-        access_token_secret = environ.get("accessTokenSecret")
-        
-        # Manuel handling of env exception.
-        if not consumer_key or not consumer_secret or not access_token_key or not access_token_secret:
-            # Change this to an actual error page.
-            return Http404
-        api = twitter.Api(consumer_key=consumer_key,
-                          consumer_secret=consumer_secret,
-                          access_token_key=access_token_key,
-                          access_token_secret=access_token_secret)
-
-        cred = api.VerifyCredentials()
-
-        if cred is None:
-            raise Exception("Could not authorize user. Please double check your credentials.")
 
         term = request.POST['search_term']
         start_date = request.POST['start_date']
@@ -45,9 +23,9 @@ def index(request):
 
             new_since_str = new_since.strftime('%Y-%m-%d')
             new_until_str = new_until.strftime('%Y-%m-%d')
-            tweets = api.GetSearch(term=term, count=50, include_entities=False,
-                                   since=new_since_str, until=new_until_str,
-                                   lang='en')
+            tweets = tw.twitter_api.GetSearch(term=term, count=50, include_entities=False,
+                                              since=new_since_str, until=new_until_str,
+                                              lang='en')
 
             positive, negative, neutral, compound = 0, 0, 0, 0
 
