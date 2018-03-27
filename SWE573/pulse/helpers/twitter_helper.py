@@ -26,3 +26,13 @@ def initialize():
         raise Exception("Could not authorize user. Please double check your credentials.")
 
     twitter_api = api
+
+
+def get_tweets(term, count, include_entities, since, until, lang):
+    if twitter_api is None:
+        raise Exception("Please initialize twitter_helper by calling initialize() first.")
+
+    tweets = twitter_api.GetSearch(term=term, count=count, include_entities=include_entities,
+                                   since=since, until=until,
+                                   lang=lang)
+    return tweets

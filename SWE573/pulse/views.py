@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from . import twitter_helper as tw
+from SWE573.pulse.helpers import twitter_helper as tw
+from SWE573.pulse.helpers import sentiment_helper as sh
 
 
 def index(request):
@@ -17,22 +17,20 @@ def index(request):
         delta = until_date - since_date
 
         result = {}
+
         for d in range(delta.days):
             new_since = since_date + timedelta(days=d)
             new_until = new_since + timedelta(days=1)
 
             new_since_str = new_since.strftime('%Y-%m-%d')
             new_until_str = new_until.strftime('%Y-%m-%d')
-            tweets = tw.twitter_api.GetSearch(term=term, count=50, include_entities=False,
-                                              since=new_since_str, until=new_until_str,
-                                              lang='en')
+
+            tweets = tw.get_tweets(term, 50, False, new_since_str, new_until_str, 'en')
 
             positive, negative, neutral, compound = 0, 0, 0, 0
 
             for tweet in tweets:
-                tweet_body = tweet.text
-                sid = SentimentIntensityAnalyzer()
-                ss = sid.polarity_scores(tweet_body)
+                ss = sh.get_sentiment_scores(tweet.text)
                 compound = compound + ss['compound']
                 positive = positive + ss['pos']
                 negative = negative + ss['neg']
@@ -52,7 +50,8 @@ def index(request):
                 average_neu = neutral / tweet_count
 
             result[new_since_str] = {'pos': average_pos, 'neg': average_neg,
-                                     'neu': average_neu, 'compound': average_comp}
+                                     'neu': average_neu, 'compound': average_comp,
+                                     'count': tweet_count}
 
         context = {'result': result}
         return render(request, "pulse/index.html", context)
