@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
-from SWE573.pulse.helpers import twitter_helper as tw
-from SWE573.pulse.helpers import sentiment_helper as sh
+from .helpers import twitter_helper as tw
+from .helpers import sentiment_helper as sh
 
 
 def index(request):

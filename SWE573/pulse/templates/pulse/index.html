@@ -16,11 +16,9 @@
 <body>
 {% block pagecontent %}
     <div>
-        <!--
         <div style="width: 60%">
             <canvas id="result_chart"></canvas>
         </div>
-        -->
         <div style="margin-top: 2em">
             <form action="{% url 'pulse:index' %}" method="post">
                 {% csrf_token %}
