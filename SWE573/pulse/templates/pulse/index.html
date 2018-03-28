@@ -7,19 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Index{% endblock %}</title>
-    {% block style %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"
-                type="application/javascript"></script>
-        <script src="{% static '/js/index.js' %}" type="application/javascript"></script>
-    {% endblock %}
 </head>
 <body>
 {% block pagecontent %}
     <div>
-        <div style="width: 60%">
+        <div id="main_chart">
             <canvas id="result_chart"></canvas>
         </div>
-        <div style="margin-top: 2em">
+        <div id="main_form">
             <form action="{% url 'pulse:index' %}" method="post">
                 {% csrf_token %}
                 <div class="inputwrap">
@@ -52,5 +47,10 @@
 
 {% endblock %}
 
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"
+            type="application/javascript"></script>
+    <script src="{% static '/js/index.js' %}" type="application/javascript"></script>
+{% endblock %}
 </body>
 </html>
