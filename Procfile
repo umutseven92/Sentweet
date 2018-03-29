@@ -1,1 +1,1 @@
-web: gunicorn SWE573.wsgi:application --log-file - --log-level debug
+web: python manage.py runserver 0.0.0.0:5000
