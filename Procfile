@@ -1,1 +1,1 @@
-web: python SWE573/manage.py runserver
+web: gunicorn SWE573.wsgi --log-file -
