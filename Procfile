@@ -1,1 +1,1 @@
-web: PYTHONPATH=`pwd`/SWE573 gunicorn SWE573.wsgi --log-file -
+web: DJANGO_SETTINGS_MODULE=SWE573.SWE573.settings gunicorn SWE573.SWE573.wsgi:application --log-file -
