@@ -1,1 +1,1 @@
-web: gunicorn SWE573.SWE573.wsgi --log-file -
+web: PYTHONPATH=`pwd`/SWE573 gunicorn SWE573.wsgi --log-file -
