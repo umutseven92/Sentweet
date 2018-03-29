@@ -13,35 +13,20 @@ body {
 
 /* Chart */
 #main_chart {
-    border: solid 1px black;
     margin: 0 auto;
-    width: 100px;
+    margin-top: 2em;
+    height: 600px;
+    width: 1200px;
 }
 
 /* Form */
 #main_form{
     margin: 0 auto;
-    width: 100px;
-}
-
-.inputwrap {
-    padding-top: 0.5em;
-}
-
-.inputwrap input {
-    display: inline-block;
-    text-align: right;
-}
-
-.inputwrap label {
-    display: inline-block;
-    width: 100px;
-    text-align: right;
+    width: 200px;
 }
 
 /* Footer */
 #myFooter {
-    bottom: 0;
     width: 100%;
     position: absolute;
     background-color: #3c3d41;

@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Index{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% block pagecontent %}
@@ -17,33 +17,24 @@
         <div id="main_form">
             <form action="{% url 'pulse:index' %}" method="post">
                 {% csrf_token %}
-                <div class="inputwrap">
+                <div class="form-group">
                     <label for="search_term_input">Search Term</label>
-                    <input type="text" name="search_term" id="search_term_input" required/>
+                    <input type="text" class="form-control" name="search_term" id="search_term_input" required/>
                 </div>
-                <div class="inputwrap">
-
+                <div class="form-group">
                     <label for="start_date_input">Start Date</label>
-                    <input type="date" name="start_date" id="start_date_input" required/>
+                    <input type="date" class="form-control" name="start_date" id="start_date_input" required/>
                 </div>
-                <div class="inputwrap">
+                <div class="form-group">
                     <label for="end_date_input">End Date</label>
-                    <input type="date" name="end_date" id="end_date_input" required/>
+                    <input type="date" class="form-control" name="end_date" id="end_date_input" required/>
                 </div>
-                <div style="margin-top: 1em">
-                    <input type="submit" value="Load"/>
-                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
 
     </div>
-    <script>
-        var res = "{{ result }}";
 
-        if (res !== "") {
-            drawChart(res);
-        }
-    </script>
 
 {% endblock %}
 
@@ -51,6 +42,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"
             type="application/javascript"></script>
     <script src="{% static '/js/index.js' %}" type="application/javascript"></script>
+    <script>
+        var res = "{{ result }}";
+
+        if (res !== "") {
+            drawChart(res);
+        }
+        else
+        {
+            drawEmptyChart();
+        }
+    </script>
 {% endblock %}
 </body>
 </html>

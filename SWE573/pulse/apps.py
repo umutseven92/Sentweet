@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from SWE573.pulse.helpers import twitter_helper as tw
+from .helpers import twitter_helper as tw
 
 
 class PulseConfig(AppConfig):

@@ -25,7 +25,7 @@ def index(request):
             new_since_str = new_since.strftime('%Y-%m-%d')
             new_until_str = new_until.strftime('%Y-%m-%d')
 
-            tweets = tw.get_tweets(term, 50, False, new_since_str, new_until_str, 'en')
+            tweets = tw.get_tweets(term, 100, False, new_since_str, new_until_str, 'en')
 
             positive, negative, neutral, compound = 0, 0, 0, 0
 
