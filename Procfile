@@ -1,1 +1,1 @@
-web: gunicorn SWE573.wsgi --log-file -
+web: gunicorn SWE573.SWE573.wsgi --log-file -
