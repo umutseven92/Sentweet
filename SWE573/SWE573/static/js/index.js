@@ -1,8 +1,16 @@
+$(window).on('load', function () {
+    $('#loading').hide();
+});
+
+$('#main_form').submit(function(){
+    $('#loading').show();
+});
+
 function drawEmptyChart() {
     var ctx = document.getElementById("result_chart").getContext('2d');
 
     var empty_chart = new Chart(ctx, {
-        type: 'line',
+        type: 'line'
     });
 }
 
@@ -50,7 +58,8 @@ function drawChart(result) {
                     borderColor: '#a8adb4',
                     data: neu_array,
                     fill: false
-                },*/
+                },
+                */
                 {
                     label: 'Compound Score',
                     backgroundColor: '#ffff00',
