@@ -1,8 +1,8 @@
-# Luscinia [![Build Status](https://travis-ci.org/umutseven92/SWE573.svg?branch=master)](https://travis-ci.org/umutseven92/SWE573)
-Lusicinia is a sentiment analyzer & visualizer that uses the Twitter API. This project is being built for the Software Development Practice class in the Boğaziçi University Software Engineering Masters Programme, under the supervision of Prof. Dr. Suzan Üsküdarli.
+# Sentweet [![Build Status](https://travis-ci.org/umutseven92/SWE573.svg?branch=master)](https://travis-ci.org/umutseven92/SWE573)
+Sentweet is a sentiment analyzer & visualizer that uses the Twitter API. This project is being built for the Software Development Practice class in the Boğaziçi University Software Engineering Masters Programme, under the supervision of Prof. Dr. Suzan Üsküdarli.
 
 ## Project Details
-Lusicinia allows users to perform sentiment analysis via a web user interface. It will query the Twitter API and chart out the general feelings people have about a certain topic. The user will be able to choose a time range and a country. The results- which are the negativity score, positivity score, neutrality score and the compound score- will be displayed in a chart.
+Sentweet allows users to perform sentiment analysis via a web user interface. It will query the Twitter API and chart out the general feelings people have about a certain topic. The user will be able to choose a time range and a country. The results- which are the negativity score, positivity score, neutrality score and the compound score- will be displayed in a chart.
 
 The project is written using Python 3 with Django. It uses the [NLTK](https://www.nltk.org/) library for NLP and sentiment analysis work.
 
