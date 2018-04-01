@@ -21,7 +21,7 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="search_term_input">Search Term</label>
-                            <input type="text" class="form-control" name="search_term" id="search_term_input" required/>
+                            <input type="text" class="form-control" name="search_term" placeholder="{{ trend }}" id="search_term_input" required/>
                         </div>
                         <div class="form-group">
                             <label for="start_date_input">Start Date</label>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="end_date_input">End Date</label>
-                            <input type="date" class="form-control" name="end_date" id="end_date_input" min="2006-03-21" max="{{ today }}" required/>
+                            <input type="date" class="form-control" name="end_date" id="end_date_input" min="2006-03-21" max="{{ today }}" value="{{ today }}" required/>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
                     </form>

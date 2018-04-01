@@ -12,6 +12,15 @@ body {
     }
 }
 
+/* Logos */
+#birb_small_logo{
+    width: 40px;
+}
+
+#birb_large_logo{
+    width: 150px;
+}
+
 /* Chart */
 #main_chart {
     margin: 0 auto;

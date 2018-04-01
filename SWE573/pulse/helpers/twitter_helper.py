@@ -1,4 +1,5 @@
 import twitter
+import random
 from os import environ
 
 twitter_api = None
@@ -36,3 +37,11 @@ def get_tweets(term, count, include_entities, since, until, lang):
                                    since=since, until=until,
                                    lang=lang)
     return tweets
+
+
+def get_random_trend():
+    if twitter_api is None:
+        raise Exception("Please initialize twitter_helper by calling initialize() first.")
+
+    trends = twitter_api.GetTrendsCurrent()
+    return random.choice(trends).name
