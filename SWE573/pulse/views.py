@@ -54,43 +54,15 @@ def index(request):
 
             tweets = tw.get_tweets(term, 100, False, new_since_str, new_until_str, 'en')
 
-            daily_positive, daily_negative, daily_neutral, daily_compound = 0, 0, 0, 0
+            sent_info = sh.get_sentiment_info(tweets)
+            misc_info = sent_info[1]
+            neg_tweet_count += misc_info['neg_tweet_count']
+            pos_tweet_count += misc_info['pos_tweet_count']
+            neu_tweet_count += misc_info['neu_tweet_count']
+            all_tweet_count += misc_info['all_tweet_count']
+            total_comp += misc_info['total_comp']
 
-            for tweet in tweets:
-                ss = sh.get_sentiment_scores(tweet.text)
-                compound = ss['compound']
-                daily_compound = daily_compound + compound
-                total_comp += compound
-
-                if compound == 0.0:
-                    neu_tweet_count += 1
-                elif compound > 0.0:
-                    pos_tweet_count += 1
-                else:
-                    neg_tweet_count += 1
-
-                daily_positive += ss['pos']
-                daily_negative += ss['neg']
-                daily_neutral += ss['neu']
-
-            tweet_count = len(tweets)
-
-            all_tweet_count += tweet_count
-
-            if tweet_count == 0:
-                average_comp = 0
-                average_pos = 0
-                average_neg = 0
-                average_neu = 0
-            else:
-                average_comp = daily_compound / tweet_count
-                average_pos = daily_positive / tweet_count
-                average_neg = daily_negative / tweet_count
-                average_neu = daily_neutral / tweet_count
-
-            result[new_since_str] = {'pos': average_pos, 'neg': -1 * average_neg,
-                                     'neu': average_neu, 'compound': average_comp,
-                                     'count': tweet_count}
+            result[new_since_str] = sent_info[0]
 
         pos_tweet_perc = pos_tweet_count / (all_tweet_count / 100)
         neg_tweet_perc = neg_tweet_count / (all_tweet_count / 100)
@@ -107,7 +79,7 @@ def index(request):
         context = {'result': result, 'summary': summary, 'today': today, 'trend': trend}
         return render(request, "pulse/index.html", context)
     else:
-        context = {'summary': 'Please run Sentweet to get a summary.', 'today': today, 'trend':trend}
+        context = {'summary': 'Please run Sentweet to get a summary.', 'today': today, 'trend': trend}
         return render(request, "pulse/index.html", context)
 
 
