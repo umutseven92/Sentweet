@@ -5,7 +5,6 @@ from .helpers import sentiment_helper as sh
 
 
 def index(request):
-    today = datetime.now().strftime('%Y-%m-%d')
     trend = "e.g. {0}".format(tw.get_random_trend())
 
     if request.method == 'POST':
@@ -76,10 +75,10 @@ def index(request):
                   '{5} ({6:.2f}%) of them were neutral.\n{7}'.format(all_tweet_count, pos_tweet_count, pos_tweet_perc,
                                                                      neg_tweet_count, neg_tweet_perc, neu_tweet_count,
                                                                      neu_tweet_perc, comp_string)
-        context = {'result': result, 'summary': summary, 'today': today, 'trend': trend}
+        context = {'result': result, 'summary': summary, 'trend': trend}
         return render(request, "pulse/index.html", context)
     else:
-        context = {'summary': 'Please run Sentweet to get a summary.', 'today': today, 'trend': trend}
+        context = {'summary': 'Please run Sentweet to get a summary.', 'trend': trend}
         return render(request, "pulse/index.html", context)
 
 
