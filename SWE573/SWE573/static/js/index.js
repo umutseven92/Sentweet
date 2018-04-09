@@ -2,18 +2,20 @@ $(function () {
     $("#start_date_input").datepicker({
         dateFormat: 'yy-mm-dd',
         maxDate: new Date(),
-        minDate: new Date(2006, 3, 21),
+        minDate: new Date(2006, 3, 21)
+        /*
         onSelect: function (dateText) {
             var weekAgo = new Date(new Date().setDate($("#end_date_input").datepicker("getDate") - 7));
             $("#end_date_input").datepicker('option', 'maxDate', weekAgo);
         }
+        */
     }).datepicker("setDate", new Date());
 
     var weekAgo = new Date(new Date().setDate(new Date().getDate()-7));
     $("#end_date_input").datepicker({
         dateFormat: 'yy-mm-dd',
-        maxDate: weekAgo,
-        minDate: new Date(2006, 3, 21)
+        maxDate: new Date(),
+        minDate: weekAgo
     }).datepicker("setDate", weekAgo);
 });
 
