@@ -13,7 +13,7 @@ def get_sentiment_info(tweets):
     neg_tweet_count, pos_tweet_count, neu_tweet_count, all_tweet_count, total_comp = 0, 0, 0, 0, 0
 
     for tweet in tweets:
-        ss = get_sentiment_scores(tweet.text)
+        ss = get_sentiment_scores(tweet)
         compound = ss['compound']
         daily_compound = daily_compound + compound
         total_comp += compound

@@ -1,5 +1,5 @@
 $(function () {
-    $("#start_date_input").datepicker({
+    $("#end_date_input").datepicker({
         dateFormat: 'yy-mm-dd',
         maxDate: new Date(),
         minDate: new Date(2006, 3, 21)
@@ -12,7 +12,7 @@ $(function () {
     }).datepicker("setDate", new Date());
 
     var weekAgo = new Date(new Date().setDate(new Date().getDate()-7));
-    $("#end_date_input").datepicker({
+    $("#start_date_input").datepicker({
         dateFormat: 'yy-mm-dd',
         maxDate: new Date(),
         minDate: weekAgo

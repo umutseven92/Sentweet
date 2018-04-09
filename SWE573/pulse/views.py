@@ -53,7 +53,9 @@ def index(request):
 
             tweets = tw.get_tweets(term, 100, False, new_since_str, new_until_str, 'en')
 
-            sent_info = sh.get_sentiment_info(tweets)
+            tweet_texts = [t.text for t in tweets]
+
+            sent_info = sh.get_sentiment_info(tweet_texts)
             misc_info = sent_info[1]
             neg_tweet_count += misc_info['neg_tweet_count']
             pos_tweet_count += misc_info['pos_tweet_count']
