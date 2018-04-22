@@ -12,31 +12,26 @@ def index(request):
         term = request.POST['search_term']
 
         if term == '' or term is None:
-            context = {'error': 'Search term cannot be empty.'}
-            return render(request, "pulse/index.html", context)
+            return return_error(request, 'Search term cannot be empty.', trend)
 
         start_date = request.POST['start_date']
 
         if start_date == '' or start_date is None:
-            context = {'error': 'Start date cannot be empty.'}
-            return render(request, "pulse/index.html", context)
+            return return_error(request, 'Start date cannot be empty.', trend)
 
         end_date = request.POST['end_date']
 
         if end_date == '' or end_date is None:
-            context = {'error': 'End date cannot be empty.'}
-            return render(request, "pulse/index.html", context)
+            return return_error(request, 'End date cannot be empty.', trend)
 
         since_date = datetime.strptime(start_date, '%Y-%m-%d')
         until_date = datetime.strptime(end_date, '%Y-%m-%d')
 
         if until_date > datetime.now():
-            context = {'error': 'End date cannot be a future date.'}
-            return render(request, "pulse/index.html", context)
+            return return_error(request, 'End date cannot be a future date.', trend)
 
         if since_date > until_date:
-            context = {'error': 'End date cannot be older than start date.'}
-            return render(request, "pulse/index.html", context)
+            return return_error(request, 'End date cannot be older than start date.', trend)
 
         delta = until_date - since_date
 
@@ -64,6 +59,9 @@ def index(request):
             total_comp += misc_info['total_comp']
 
             result[new_since_str] = sent_info[0]
+
+        if all_tweet_count == 0:
+            return return_error(request, 'No tweets containing {0} are found.'.format(term), trend)
 
         pos_tweet_perc = pos_tweet_count / (all_tweet_count / 100)
         neg_tweet_perc = neg_tweet_count / (all_tweet_count / 100)
@@ -100,3 +98,7 @@ def get_comp_result(comp_result, term):
     elif comp_result < -0.5:
         # Hate
         return "To summarize, people HATE {0}.".format(term)
+
+def return_error(request, error_string, trend):
+        context = {'summary': 'Please run Sentweet to get a summary.', 'trend': trend,'error_string':error_string}
+        return render(request, "pulse/index.html", context)

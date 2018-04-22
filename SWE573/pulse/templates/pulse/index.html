@@ -50,8 +50,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"
             type="application/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="application/javascript"></script>
-    <script src="https://s3.amazonaws.com/sentweet-s3/js/index.js" type="application/javascript"></script>
+    <script src="{% static 'js/index.js' %}" type="application/javascript"></script>
     <script>
+        var error = "{{ error_string }}"
+
+        if(error !== "") {
+            alert(error);
+        }
         var res = "{{ result }}";
 
         if (res !== "") {
